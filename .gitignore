@@ -54,6 +54,10 @@ modules.builtin
 /vmlinuz
 /System.map
 /Module.markers
+/*.img
+
+# ramfs
+!/ramdisk/**
 
 #
 # RPM spec file (make rpm-pkg)
