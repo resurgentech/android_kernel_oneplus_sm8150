@@ -131,3 +131,4 @@ all.config
 kernel/configs/android-*.cfg
 
 /coretech/defrag/core/defrag_core.o_shipped
+/scripts/mkbootimg/mkbootimg
