@@ -55,7 +55,11 @@ cd $KERNELDIR
 
 echo "Making new boot image"
 find $OUT_DIR/arch/arm64/boot/dts -name '*.dtb' -exec cat {} + > $RAMFS_TMP.dtb
-mkbootimg \
+gcc -O2 -Iscripts/mkbootimg \
+    scripts/mkbootimg/mkbootimg.c \
+    scripts/mkbootimg/libmincrypt/sha.c \
+    scripts/mkbootimg/libmincrypt/sha256.c -o scripts/mkbootimg/mkbootimg
+scripts/mkbootimg/mkbootimg \
     --kernel $OUT_DIR/arch/arm64/boot/Image.gz \
     --ramdisk $RAMFS_TMP.cpio.gz \
     --cmdline 'androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7 androidboot.usbcontroller=a600000.dwc3 buildvariant=user printk.devkmsg=on' \
